@@ -13,6 +13,7 @@ class MarketMaker:
         self.current_step = 0
 
     def update_prices(self, market_price):
+        """ Updates the bid and ask order prices of the market maker """
         # Adjust the theoretical price based on inventory
         inventory_factor = self.inventory / self.max_inventory
         shift = inventory_factor * self.spread / 2
@@ -24,9 +25,8 @@ class MarketMaker:
             self.ask_price = theoretical_price + self.spread / 2
         self.current_step += 1
 
-        print(self.inventory, self.bid_price, market_price, self.ask_price)
-
     def execute_trade(self, market_price):
+        """ Executes trades when the market price hits the bid or ask orders """
         if market_price <= self.bid_price and self.inventory < self.max_inventory:
             # Buy stock
             self.inventory += 1
@@ -37,6 +37,7 @@ class MarketMaker:
             self.cash += self.ask_price
 
     def pnl(self, price):
+        """ Returns the current unrealized PnL """
         return self.cash + price * self.inventory
     
 
