@@ -2,13 +2,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-PRICE = 1000
+PRICE = 100
 TIME = 1000
 DT = 0.01
 MU = 1e-4   # drift
 VOL = 0.01  # baseline volatility
 VAR = 1     # variability coefficient
-
 
 def volatility(t, variability_coeff):
     """ Returns the volatility at time t """
@@ -16,7 +15,7 @@ def volatility(t, variability_coeff):
     sigma = VOL + variability
     return sigma
 
-def brownian(s_0=1000, mu=MU, T=TIME, dt=DT, variability_coeff=VAR):
+def brownian(s_0=PRICE, mu=MU, T=TIME, dt=DT, variability_coeff=VAR):
     """ Returns a Geometric Brownian Motion (GBM) """
     N = int(T/dt)
     s = np.zeros(N)
@@ -32,7 +31,6 @@ def brownian(s_0=1000, mu=MU, T=TIME, dt=DT, variability_coeff=VAR):
 
 if __name__ == "__main__":
     stock_prices, timesteps = brownian()
-
     # Plotting
     plt.figure(figsize=(10, 6))
     plt.plot(timesteps, stock_prices, label='Simulated Stock Price')
