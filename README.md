@@ -10,5 +10,4 @@ python src/main.py
 
 ## Result
 The image below is an example run of the market maker.
-
 ![result](img/result.png)

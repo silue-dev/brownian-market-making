@@ -4,6 +4,44 @@ from plot import plot_performance
 from brownian import brownian_motion
 
 class MarketMaker:
+    """
+    This class implements a simulation of a market maker based on the 
+    Avellaneda-Stoikov High-Frequency Trading (HFT) model. The 
+    Avellaneda-Stoikov model is a mathematical framework used in 
+    quantitative finance to model the optimal strategy for a market 
+    maker, considering factors like inventory, risk aversion, and 
+    market impact.
+
+    In this implementation, the market maker sets bid (r_b) and ask 
+    (r_a) prices for a stock, with these prices being influenced by 
+    the stock's reserve price (r), which is adjusted for the market 
+    maker's current inventory (q) and a gamma parameter that 
+    represents risk aversion. The spread between bid and ask prices 
+    is determined by both the gamma and k parameters, where k 
+    measures market impact.
+
+    The stock price movements are simulated using a Brownian motion 
+    model, characterized by parameters mu (drift) and sigma (volatility). 
+    The market maker's performance is evaluated in terms of cash flow, 
+    inventory, and profit and loss (PnL) over the simulation period.
+
+    Arguments
+    ----------
+    s0 (float):     The starting price of the stock.
+    n (int):        The number of time steps in the simulation.
+    dt (float):     The time step duration.
+    mu (float):     The drift of the stock price.
+    sigma (float):  The volatility of the stock price.
+    gamma (float):  The risk aversion parameter.
+    k (float):      The market impact parameter.
+
+    Returns
+    -------
+    tuple of arrays: 
+        Contains time series data for time, stock price, reserve price, 
+        ask price, bid price, inventory, and PnL.
+    """
+
     def __init__(self, s0, n, dt, mu, sigma, gamma, k):
         self.s0 = s0
         self.n = n
@@ -13,7 +51,7 @@ class MarketMaker:
         self.gamma = gamma
         self.k = k
 
-        # Timesteps
+        # Time steps
         self.t = np.linspace(0.0, n * dt, n)
         
         # Order execution probability factors

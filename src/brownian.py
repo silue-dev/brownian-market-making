@@ -14,7 +14,7 @@ def brownian_motion(s0, n, dt, mu, sigma):
     distribution with std (standard deviation) sigma. The std in s can be 
     interpreted as the volatility of the simulated stock. The multiplication 
     with dt means that the size of the price move increases with the size of 
-    a timestep. This makes sense, as a longer timestep dt implies the 
+    a time step. This makes sense, as a longer time step dt implies the 
     potential for a larger price move during that time.
 
     In the context of a discrete approximation for computer simulation, 
@@ -40,8 +40,8 @@ def brownian_motion(s0, n, dt, mu, sigma):
     Arguments
     ---------
     s0 (float):     The starting price of the stock.
-    n (int):        The number of steps to take.
-    dt (float):     The timestep.
+    n (int):        The number of time steps to take.
+    dt (float):     The time step.
     mu (float):     The drift of the motion.
     sigma (float):  The volatility of the stock.
 
