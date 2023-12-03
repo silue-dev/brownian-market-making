@@ -25,6 +25,7 @@ class MarketMaker:
     The market maker's performance is evaluated in terms of cash flow, 
     inventory, and profit and loss (PnL) over the simulation period.
 
+
     Arguments
     ----------
     s0 (float):     The starting price of the stock.
