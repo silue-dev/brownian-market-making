@@ -32,7 +32,7 @@ def brownian_motion(s0, n, dt, mu, sigma):
     epsilon is sampled from N(0,1), then we need to multiply epsilon with 
     sigma * sqrt(dt).
 
-    We add a drift coefficient mu that induces a price trend:
+    Finally, we add a drift coefficient mu that induces a price trend:
     
         s(t + dt) = s(t) + mu * dt + sigma * sqrt(dt) * epsilon
     
@@ -42,7 +42,7 @@ def brownian_motion(s0, n, dt, mu, sigma):
     s0 (float):     The starting price of the stock.
     n (int):        The number of time steps to take.
     dt (float):     The time step.
-    mu (float):     The drift of the motion.
+    mu (float):     The drift of the stock.
     sigma (float):  The volatility of the stock.
 
     Returns
