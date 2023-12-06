@@ -128,8 +128,8 @@ class MarketMaker:
 
 if __name__ == "__main__":
     marketmaker = MarketMaker(s0=100,
-                              n=250,
-                              dt=0.01,
+                              n=200,
+                              dt=0.005,
                               mu=0,
                               sigma=2,
                               gamma=0.1,
