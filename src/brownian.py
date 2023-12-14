@@ -1,7 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-
 def brownian_motion(s0, n, dt, mu, sigma):
     """
     Returns a stock price movement as a Brownian motion (more specifically, 
