@@ -49,8 +49,6 @@ def brownian_motion(s0, n, dt, mu, sigma):
     s (np.array):   The Brownian motion, representing the stock price.
     
     """
-
-    # Initialize the array of stock prices
     s = np.zeros(n)
     s[0] = s0
 

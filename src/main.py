@@ -27,7 +27,7 @@ class MarketMaker:
 
 
     Arguments
-    ----------
+    ---------
     s0 (float):     The starting price of the stock.
     n (int):        The number of time steps in the simulation.
     dt (float):     The time step duration.
@@ -36,13 +36,7 @@ class MarketMaker:
     gamma (float):  The risk aversion parameter.
     k (float):      The market impact parameter.
 
-    Returns
-    -------
-    tuple of arrays: 
-        Contains time series data for time, stock price, reserve price, 
-        ask price, bid price, inventory, and PnL.
     """
-
     def __init__(self, s0, n, dt, mu, sigma, gamma, k):
         self.s0 = s0
         self.n = n
