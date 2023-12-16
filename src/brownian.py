@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import pickle
 
 class BrownianMotion:
     """
@@ -63,6 +64,12 @@ class BrownianMotion:
             s[i] = s[i-1] + self.mu * self.dt + self.sigma * np.sqrt(self.dt) * epsilon
 
         return s
+    
+    def serialize(self):
+        return pickle.dumps(self)
+    
+    def deserialize(serialized_bm):
+        return pickle.loads(serialized_bm)
 
 
 if __name__ == "__main__":
