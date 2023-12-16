@@ -1,9 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-def brownian_motion(s0, n, dt, mu, sigma):
+class BrownianMotion:
     """
-    Returns a stock price movement as a Brownian motion (more specifically, 
+    Represents a stock price movement `s` as a Brownian motion (more specifically, 
     a Wiener process), for which the formula goes as follows:
 
         s(t + dt) = s(t) + N(0, sigma^2 * dt)
@@ -44,23 +44,28 @@ def brownian_motion(s0, n, dt, mu, sigma):
     mu (float):     The drift of the stock.
     sigma (float):  The volatility of the stock.
 
-    Returns
-    -------
-    s (np.array):   The Brownian motion, representing the stock price.
-    
     """
-    s = np.zeros(n)
-    s[0] = s0
+    def __init__(self, s0, n, dt, mu, sigma):
+        self.s0 = s0
+        self.n = n
+        self.dt = dt
+        self.mu = mu
+        self.sigma = sigma
+        self.s = self.generate_stock_prices()
 
-    # Generate the stock price path
-    for i in range(1, n):
-        epsilon = np.random.normal()
-        s[i] = s[i-1] + mu * dt + sigma * np.sqrt(dt) * epsilon
+    def generate_stock_prices(self):
+        s = np.zeros(self.n)
+        s[0] = self.s0
 
-    return s
+        # Generate the stock price path
+        for i in range(1, self.n):
+            epsilon = np.random.normal()
+            s[i] = s[i-1] + self.mu * self.dt + self.sigma * np.sqrt(self.dt) * epsilon
+
+        return s
 
 
 if __name__ == "__main__":
-    s = brownian_motion(s0=100, n=1000, dt=0.01, mu=0, sigma=2)
-    plt.plot(s)
+    bm = BrownianMotion(s0=100, n=1000, dt=0.01, mu=0, sigma=2)
+    plt.plot(bm.s)
     plt.show()
