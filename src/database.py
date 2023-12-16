@@ -3,7 +3,7 @@
 import sqlite3
 
 class Database:
-    def __init__(self, db_path='src/market_making.db'):
+    def __init__(self, db_path='src/database.db'):
         self.db_path = db_path
         self.connection = None
         self.cursor = None
