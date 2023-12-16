@@ -17,5 +17,4 @@ if __name__ == "__main__":
         t, s, r, r_a, r_b, q, pnl = marketmaker.run()
         pnls.append(pnl)
     
-    # Plots
     plot_performance(t, s, r, r_a, r_b, q, np.array(pnls))
