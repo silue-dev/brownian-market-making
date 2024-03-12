@@ -21,7 +21,7 @@ def run_simulations(db):
     return t, s, r, r_a, r_b, q, np.array(pnls)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     db = Database()
     db.connect()
     db.create_table()

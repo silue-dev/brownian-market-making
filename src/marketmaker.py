@@ -105,7 +105,7 @@ class MarketMaker:
         return self.t, self.bm.s, r, r_a, r_b, q, pnl
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     pnls = []
     n_sim = 100
     for i in range(n_sim):

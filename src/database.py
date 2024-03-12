@@ -22,15 +22,15 @@ class Database:
         self.connection.commit()
 
     def insert_brownian_motion(self, motion_data):
-        self.cursor.execute("INSERT INTO brownian_motions (motion_data) VALUES (?)", (motion_data,))
+        self.cursor.execute('INSERT INTO brownian_motions (motion_data) VALUES (?)', (motion_data,))
         self.connection.commit()
 
     def fetch_all_brownian_motions(self):
-        self.cursor.execute("SELECT motion_data FROM brownian_motions")
+        self.cursor.execute('SELECT motion_data FROM brownian_motions')
         return self.cursor.fetchall()
     
     def clear(self):
-        self.cursor.execute("DELETE FROM brownian_motions")
+        self.cursor.execute('DELETE FROM brownian_motions')
         self.connection.commit()
 
     def close(self):

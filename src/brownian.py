@@ -72,7 +72,7 @@ class BrownianMotion:
         return pickle.loads(serialized_bm)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     bm = BrownianMotion(s0=100, n=1000, dt=0.01, mu=0, sigma=2)
     plt.plot(bm.s)
     plt.show()
