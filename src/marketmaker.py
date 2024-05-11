@@ -57,8 +57,8 @@ class MarketMaker:
         self.t:     The array of time steps.
         self.bm.s:  The stock price (Brownian motion).
         r:          The array containing reserve prices at each time step.
-        r_a:        The array of ask prices.
-        r_b:        The array of bid prices.
+        r_a:        The array of ask prices at each time step.
+        r_b:        The array of bid prices at each time step.
         q:          The array of inventory snapshots at each time step.
         pnl:        The PnL array, i.e., the PnL at each time step.
 
