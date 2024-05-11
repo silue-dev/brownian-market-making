@@ -82,7 +82,8 @@ class BrownianMotion:
         """
         return pickle.dumps(self)
     
-    def deserialize(self, serialized_bm: bytes) -> 'BrownianMotion':
+    @classmethod
+    def deserialize(cls, serialized_bm: bytes) -> 'BrownianMotion':
         """
         Reconstructs the Brownian motion object given its seralization.
 
