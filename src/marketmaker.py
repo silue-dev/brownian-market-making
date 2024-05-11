@@ -28,12 +28,12 @@ class MarketMaker:
 
     Arguments
     ---------
-    bm (np.array):  The brownian motion, representing the stock price.
-    k (float):      The market impact parameter.
-    gamma (float):  The risk aversion parameter.
+    bm:     The brownian motion, representing the stock price.
+    k:      The market impact parameter.
+    gamma:  The risk aversion parameter.
 
     """
-    def __init__(self, bm, k, gamma):
+    def __init__(self, bm: np.ndarray, k: float, gamma: float):
         self.bm = bm
         self.k = k
         self.gamma = gamma
@@ -69,7 +69,8 @@ class MarketMaker:
         # Run market maker on stock
         for i in range(self.bm.n):
             # Compute reserve price and spread
-            r[i] = self.bm.s[i] - q[i] * self.gamma * self.bm.sigma**2 * (T - self.bm.dt * i)
+            r[i] = self.bm.s[i] \
+                - q[i] * self.gamma * self.bm.sigma ** 2 * (T - self.bm.dt * i)
             spread = 2 / self.gamma * np.log(1 + self.gamma / self.k)
 
             # Compute quotes

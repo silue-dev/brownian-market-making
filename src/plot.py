@@ -1,14 +1,20 @@
 import matplotlib.pyplot as plt
 
-def plot_performance(t, s, r, r_a, r_b, q, pnls):
+def plot_performance(t, s, r, r_a, r_b, q, pnls) -> None:
+    """
+    Plots the performance of the market maker.
+
+    """
     f = plt.figure(figsize=(12, 12))
 
     # Final run prices
     ax1 = f.add_subplot(2, 2, 1)
     plt.plot(t, s, color='black', label='Market price')
     plt.plot(t, r, color='blue', linestyle='dashed', label='Reservation price')
-    plt.plot(t, r_a, color='red', linestyle='', marker='x', markersize='2', label='Ask price')
-    plt.plot(t, r_b, color='green', linestyle='', marker='x', markersize='2', label='Bid price')
+    plt.plot(t, r_a, color='red', linestyle='', marker='x', markersize='2', 
+             label='Ask price')
+    plt.plot(t, r_b, color='green', linestyle='', marker='x', markersize='2', 
+             label='Bid price')
     plt.xlabel('Time', fontweight='bold')
     plt.ylabel('Price', fontweight='bold')
     plt.grid(True)

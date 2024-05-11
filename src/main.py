@@ -4,13 +4,31 @@ from marketmaker import MarketMaker
 from brownian import BrownianMotion
 from database import Database
 
-def store_brownian_motions(db, n_sim):
+def store_brownian_motions(db, n_sim: int) -> None:
+    """"
+    Generate a given number of Brownian motions and store them.
+
+    Arguments
+    ---------
+    db:     The database to store the brownian motions in.
+    n_sim:  The number of Brownian motions to generate.
+
+    """
     for _ in range(n_sim):
         bm = BrownianMotion(s0=100, n=200, dt=0.005, mu=0, sigma=2)
         serialized_bm = bm.serialize()
         db.insert_brownian_motion(serialized_bm)
 
-def run_simulations(db):
+def run_simulations(db: Database) -> list:
+    """
+    Run the market making simulation on the Brownian motions stored
+    inside the given database.
+
+    Arguments
+    ---------
+    db: The database that contains the Brownian motions.
+
+    """
     pnls = []
     brownian_motions = db.fetch_all_brownian_motions()
     for serialized_bm in brownian_motions:

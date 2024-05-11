@@ -4,8 +4,8 @@ import pickle
 
 class BrownianMotion:
     """
-    Represents a stock price movement `s` as a Brownian motion (more specifically, 
-    a Wiener process), for which the formula goes as follows:
+    Represents a stock price movement `s` as a Brownian motion (more 
+    specifically, a Wiener process), for which the formula goes as follows:
 
         s(t + dt) = s(t) + N(0, sigma^2 * dt)
 
@@ -22,8 +22,8 @@ class BrownianMotion:
 
         s(t + dt) = s(t) + sigma * sqrt(dt) * epsilon
     
-    where epsilon is a random sample from a standard normal distribution, N(0,1). 
-    The intuition behind this is based on statistical theory: 
+    where epsilon is a random sample from a standard normal distribution, 
+    N(0,1). The intuition behind this is based on statistical theory: 
 
         Consider a constant c, and a random variable X with a variance y. 
         The variance of c * X is c^2 * y.
@@ -39,14 +39,19 @@ class BrownianMotion:
 
     Arguments
     ---------
-    s0 (float):     The starting price of the stock.
-    n (int):        The number of time steps to take.
-    dt (float):     The time step.
-    mu (float):     The drift of the stock.
-    sigma (float):  The volatility of the stock.
+    s0:     The starting price of the stock.
+    n:      The number of time steps to take.
+    dt:     The time step.
+    mu:     The drift of the stock.
+    sigma:  The volatility of the stock.
 
     """
-    def __init__(self, s0, n, dt, mu, sigma):
+    def __init__(self, 
+                 s0: float, 
+                 n: int, 
+                 dt: float, 
+                 mu: float, 
+                 sigma: float) -> None:
         self.s0 = s0
         self.n = n
         self.dt = dt
@@ -54,21 +59,38 @@ class BrownianMotion:
         self.sigma = sigma
         self.s = self.generate_stock_prices()
 
-    def generate_stock_prices(self):
+    def generate_stock_prices(self) -> np.ndarray:
+        """
+        Generates the stock price movement.
+
+        """
         s = np.zeros(self.n)
         s[0] = self.s0
 
         # Generate the stock price path
         for i in range(1, self.n):
             epsilon = np.random.normal()
-            s[i] = s[i-1] + self.mu * self.dt + self.sigma * np.sqrt(self.dt) * epsilon
+            s[i] = s[i-1] + self.mu * self.dt \
+                   + self.sigma * np.sqrt(self.dt) * epsilon
 
         return s
     
-    def serialize(self):
+    def serialize(self) -> bytes:
+        """
+        Serializes (i.e., saves) the current Brownian motion object.
+
+        """
         return pickle.dumps(self)
     
-    def deserialize(serialized_bm):
+    def deserialize(self, serialized_bm: bytes) -> 'BrownianMotion':
+        """
+        Reconstructs the Brownian motion object given its seralization.
+
+        Arguments
+        ---------
+        serialized_bm:  The seralized Brownian motion.
+        
+        """
         return pickle.loads(serialized_bm)
 
 
