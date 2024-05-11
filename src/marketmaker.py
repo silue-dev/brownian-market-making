@@ -33,7 +33,10 @@ class MarketMaker:
     gamma:  The risk aversion parameter.
 
     """
-    def __init__(self, bm: np.ndarray, k: float, gamma: float):
+    def __init__(self, 
+                 bm: np.ndarray, 
+                 k: float, 
+                 gamma: float) -> None:
         self.bm = bm
         self.k = k
         self.gamma = gamma
@@ -45,7 +48,21 @@ class MarketMaker:
         self.M = 1
         self.A = 1.0 / bm.dt / np.exp(k * self.M / 2)
 
-    def run(self):
+    def run(self) -> list[np.ndarray]:
+        """
+        Runs the market maker on the Brownian motions.
+
+        Returns
+        -------
+        self.t:     The array of time steps.
+        self.bm.s:  The stock price (Brownian motion).
+        r:          The array containing reserve prices at each time step.
+        r_a:        The array of ask prices.
+        r_b:        The array of bid prices.
+        q:          The array of inventory snapshots at each time step.
+        pnl:        The PnL array, i.e., the PnL at each time step.
+
+        """
         # Trading time
         T = self.bm.n * self.bm.dt
 

@@ -1,6 +1,13 @@
+import numpy as np
 import matplotlib.pyplot as plt
 
-def plot_performance(t, s, r, r_a, r_b, q, pnls) -> None:
+def plot_performance(t: np.ndarray, 
+                     s: np.ndarray, 
+                     r: np.ndarray, 
+                     r_a: np.ndarray, 
+                     r_b: np.ndarray, 
+                     q: np.ndarray, 
+                     pnls: np.ndarray) -> None:
     """
     Plots the performance of the market maker.
 

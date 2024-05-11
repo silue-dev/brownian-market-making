@@ -40,7 +40,7 @@ class BrownianMotion:
     Arguments
     ---------
     s0:     The starting price of the stock.
-    n:      The number of time steps to take.
+    n:      The total number of time steps.
     dt:     The time step.
     mu:     The drift of the stock.
     sigma:  The volatility of the stock.

@@ -19,7 +19,7 @@ def store_brownian_motions(db, n_sim: int) -> None:
         serialized_bm = bm.serialize()
         db.insert_brownian_motion(serialized_bm)
 
-def run_simulations(db: Database) -> list:
+def run_simulations(db: Database) -> list[any]:
     """
     Run the market making simulation on the Brownian motions stored
     inside the given database.
