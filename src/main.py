@@ -26,7 +26,7 @@ def run_simulations(db: Database) -> list[np.ndarray]:
 
     Arguments
     ---------
-    db: The database that contains the Brownian motions.
+    db:  The database that contains the Brownian motions.
 
     """
     pnls = []
