@@ -17,7 +17,7 @@ class Database:
         self.connection = None
         self.cursor = None
 
-    def connect(self):
+    def connect(self) -> None:
         """
         Creates the database and connects to it.
 
@@ -25,7 +25,7 @@ class Database:
         self.connection = sqlite3.connect(self.db_path)
         self.cursor = self.connection.cursor()
 
-    def create_table(self):
+    def create_table(self) -> None:
         """
         Creates the table for storing Brownian motions.
         
