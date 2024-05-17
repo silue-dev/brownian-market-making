@@ -44,7 +44,7 @@ def run_simulations(db: Database) -> tuple[np.ndarray, ...]:
 
     for serialized_bm in brownian_motions:
         bm = BrownianMotion.deserialize(serialized_bm[0])
-        marketmaker = MarketMaker(bm=bm, k=1.5, gamma=0.1)
+        marketmaker = MarketMaker(bm, k=1.5, gamma=0.1)
         t, s, r, r_a, r_b, q, pnl = marketmaker.run()
         pnls.append(pnl)
     
