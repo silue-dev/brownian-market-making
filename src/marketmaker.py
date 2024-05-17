@@ -28,9 +28,9 @@ class MarketMaker:
 
     Arguments
     ---------
-    bm:     The brownian motion, representing the stock price.
-    k:      The market impact parameter.
-    gamma:  The risk aversion parameter.
+    bm    :  The brownian motion, representing the stock price movement.
+    k     :  The market impact parameter.
+    gamma :  The risk aversion parameter.
 
     """
     def __init__(self, 
@@ -50,17 +50,17 @@ class MarketMaker:
 
     def run(self) -> list[np.ndarray]:
         """
-        Runs the market maker on the Brownian motions.
+        Runs the market maker on the stock price movement (Brownian motion).
 
         Returns
         -------
-        self.t:     The array of time steps.
-        self.bm.s:  The stock price (Brownian motion).
-        r:          The array containing reserve prices at each time step.
-        r_a:        The array of ask prices at each time step.
-        r_b:        The array of bid prices at each time step.
-        q:          The array of inventory snapshots at each time step.
-        pnl:        The PnL array, i.e., the PnL at each time step.
+        self.t    :  The array of time steps.
+        self.bm.s :  The stock price movement (Brownian motion).
+        r         :  The array containing reserve prices at each time step.
+        r_a       :  The array of ask prices at each time step.
+        r_b       :  The array of bid prices at each time step.
+        q         :  The array of inventory snapshots at each time step.
+        pnl       :  The PnL array, i.e., the PnL at each time step.
 
         """
         # Trading time
@@ -97,6 +97,7 @@ class MarketMaker:
             if i < self.bm.n - 1:
                 # Since we don't have an order book, we must compute 
                 # the probability that the asks and/or bids get executed:
+
                 ### Deltas
                 delta_a = r_a[i] - self.bm.s[i]
                 delta_b = self.bm.s[i] - r_b[i]
@@ -121,19 +122,3 @@ class MarketMaker:
                 pnl[i+1] = cash[i+1] + q[i+1] * self.bm.s[i]
         
         return self.t, self.bm.s, r, r_a, r_b, q, pnl
-
-
-if __name__ == '__main__':
-    pnls = []
-    n_sim = 100
-    for i in range(n_sim):
-        bm = BrownianMotion(s0=100,
-                        n=200,
-                        dt=0.005,
-                        mu=0,
-                        sigma=2)
-        marketmaker = MarketMaker(bm=bm, k=1.5, gamma=0.1)
-        t, s, r, r_a, r_b, q, pnl = marketmaker.run()
-        pnls.append(pnl)
-    
-    plot_performance(t, s, r, r_a, r_b, q, np.array(pnls))

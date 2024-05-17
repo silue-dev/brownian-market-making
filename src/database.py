@@ -44,7 +44,7 @@ class Database:
 
         Arguments
         ---------
-        motion_data:  The Brownian motion data.
+        motion_data :  The Brownian motion data.
         
         """
         self.cursor.execute(

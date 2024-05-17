@@ -10,8 +10,8 @@ def store_brownian_motions(db, n_sim: int) -> None:
 
     Arguments
     ---------
-    db:     The database to store the brownian motions in.
-    n_sim:  The number of Brownian motions to generate.
+    db    :  The database to store the brownian motions in.
+    n_sim :  The number of Brownian motions to generate.
 
     """
     for _ in range(n_sim):
@@ -26,7 +26,17 @@ def run_simulations(db: Database) -> list[np.ndarray]:
 
     Arguments
     ---------
-    db:  The database that contains the Brownian motions.
+    db :  The database that contains the Brownian motions.
+
+    Returns
+    -------
+    self.t    :  The array of time steps.
+    self.bm.s :  The stock price movement (Brownian motion).
+    r         :  The array containing reserve prices at each time step.
+    r_a       :  The array of ask prices at each time step.
+    r_b       :  The array of bid prices at each time step.
+    q         :  The array of inventory snapshots at each time step.
+    pnls      :  The PnL array, i.e., the PnL at each time step.
 
     """
     pnls = []
@@ -38,18 +48,31 @@ def run_simulations(db: Database) -> list[np.ndarray]:
         pnls.append(pnl)
     return t, s, r, r_a, r_b, q, np.array(pnls)
 
+def main() -> None:
+    """
+    Main execution, which brings together the database setup, stock price
+    data generation, market making simulation, and performance plotting.
 
-if __name__ == '__main__':
+    """
+    # Setup database
     db = Database()
     db.connect()
     db.create_table()
 
+    # Generate and store Brownian motions
     n_sim = 100
     store_brownian_motions(db, n_sim)
 
+    # Run simulations
     t, s, r, r_a, r_b, q, pnls = run_simulations(db)
     
+    # Clear and close databse
     db.clear()
     db.close()
 
+    # Plot market maker's performance
     plot_performance(t, s, r, r_a, r_b, q, pnls)
+
+
+if __name__ == '__main__':
+    main()

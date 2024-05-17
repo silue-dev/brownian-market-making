@@ -11,6 +11,16 @@ def plot_performance(t: np.ndarray,
     """
     Plots the performance of the market maker.
 
+    Arguments
+    ---------
+    t    :  The array of time steps.
+    s    :  The stock price movement (Brownian motion).
+    r    :  The array containing reserve prices at each time step.
+    r_a  :  The array of ask prices at each time step.
+    r_b  :  The array of bid prices at each time step.
+    q    :  The array of inventory snapshots at each time step.
+    pnls :  The PnL arrays of all simulated runs.
+
     """
     f = plt.figure(figsize=(12, 12))
 

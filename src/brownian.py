@@ -39,11 +39,11 @@ class BrownianMotion:
 
     Arguments
     ---------
-    s0:     The starting price of the stock.
-    n:      The total number of time steps.
-    dt:     The time step.
-    mu:     The drift of the stock.
-    sigma:  The volatility of the stock.
+    s0    :  The starting price of the stock.
+    n     :  The total number of time steps.
+    dt    :  The time step.
+    mu    :  The drift of the stock.
+    sigma :  The volatility of the stock.
 
     """
     def __init__(self, 
@@ -63,6 +63,10 @@ class BrownianMotion:
         """
         Generates the stock price movement.
 
+        Returns
+        -------
+        s :  The stock price movement.
+
         """
         s = np.zeros(self.n)
         s[0] = self.s0
@@ -79,6 +83,10 @@ class BrownianMotion:
         """
         Serializes (i.e., saves) the current Brownian motion object.
 
+        Returns
+        -------
+        A serialized representation of the current Brownian motion object.
+
         """
         return pickle.dumps(self)
     
@@ -89,13 +97,11 @@ class BrownianMotion:
 
         Arguments
         ---------
-        serialized_bm:  The seralized Brownian motion.
+        serialized_bm :  The seralized Brownian motion.
+
+        Returns
+        -------
+        The reconstructed Brownian motion object.
         
         """
         return pickle.loads(serialized_bm)
-
-
-if __name__ == '__main__':
-    bm = BrownianMotion(s0=100, n=1000, dt=0.01, mu=0, sigma=2)
-    plt.plot(bm.s)
-    plt.show()
