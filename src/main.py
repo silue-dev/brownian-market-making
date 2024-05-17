@@ -63,14 +63,14 @@ def main(n_sim: int) -> None:
     db = Database()
     db.connect()
     db.create_table()
-    store_brownian_motions(db=db, n_sim=n_sim)
+    store_brownian_motions(db, n_sim)
 
-    t, s, r, r_a, r_b, q, pnls = run_simulations(db=db)
+    t, s, r, r_a, r_b, q, pnls = run_simulations(db)
     
     db.clear()
     db.close()
 
-    plot_performance(t=t, s=s, r=r, r_a=r_a, r_b=r_b, q=q, pnls=pnls)
+    plot_performance(t, s, r, r_a, r_b, q, pnls)
 
 
 if __name__ == '__main__':
