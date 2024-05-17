@@ -1,11 +1,9 @@
 import numpy as np
 from random import random
-from brownian import BrownianMotion
-from plot import plot_performance
 
 class MarketMaker:
     """
-    This class implements a simulation of a market maker based on the 
+    The implementation of a market maker based on the 
     Avellaneda-Stoikov High-Frequency Trading (HFT) model. The 
     Avellaneda-Stoikov model is a mathematical framework used in 
     quantitative finance to model the optimal strategy for a market 
