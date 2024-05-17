@@ -12,7 +12,7 @@ class Database:
 
     """
     def __init__(self, 
-                 db_path:str='src/data/database.db') -> None:
+                 db_path: str = 'src/data/database.db') -> None:
         self.db_path = db_path
         self.connection = None
         self.cursor = None
