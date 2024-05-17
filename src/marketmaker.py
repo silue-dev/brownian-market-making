@@ -46,7 +46,7 @@ class MarketMaker:
         self.M = 1
         self.A = 1.0 / bm.dt / np.exp(k * self.M / 2)
 
-    def run(self) -> list[np.ndarray]:
+    def run(self) -> tuple[np.ndarray, ...]:
         """
         Runs the market maker on the stock price movement (Brownian motion).
 
