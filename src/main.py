@@ -41,38 +41,37 @@ def run_simulations(db: Database) -> list[np.ndarray]:
     """
     pnls = []
     brownian_motions = db.fetch_all_brownian_motions()
+
     for serialized_bm in brownian_motions:
         bm = BrownianMotion.deserialize(serialized_bm[0])
         marketmaker = MarketMaker(bm=bm, k=1.5, gamma=0.1)
         t, s, r, r_a, r_b, q, pnl = marketmaker.run()
         pnls.append(pnl)
+    
     return t, s, r, r_a, r_b, q, np.array(pnls)
 
-def main() -> None:
+def main(n_sim: int) -> None:
     """
     Main execution, which brings together the database setup, stock price
     data generation, market making simulation, and performance plotting.
 
+    Arguments
+    ---------
+    n_sim :  The number of market making simulations to run.
+
     """
-    # Setup database
     db = Database()
     db.connect()
     db.create_table()
+    store_brownian_motions(db=db, n_sim=n_sim)
 
-    # Generate and store Brownian motions
-    n_sim = 100
-    store_brownian_motions(db, n_sim)
-
-    # Run simulations
-    t, s, r, r_a, r_b, q, pnls = run_simulations(db)
+    t, s, r, r_a, r_b, q, pnls = run_simulations(db=db)
     
-    # Clear and close databse
     db.clear()
     db.close()
 
-    # Plot market maker's performance
-    plot_performance(t, s, r, r_a, r_b, q, pnls)
+    plot_performance(t=t, s=s, r=r, r_a=r_a, r_b=r_b, q=q, pnls=pnls)
 
 
 if __name__ == '__main__':
-    main()
+    main(n_sim=100)
