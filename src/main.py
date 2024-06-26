@@ -4,9 +4,15 @@ from marketmaker import MarketMaker
 from brownian import BrownianMotion
 from database import Database
 
-def store_brownian_motions(db, n_sim: int) -> None:
-    """"
-    Generate a given number of Brownian motions and store them.
+def store_brownian_motions(db: Database, 
+                           n_sim: int,
+                           s0: int,
+                           n: int,
+                           dt: float,
+                           mu: float,
+                           sigma: float) -> None:
+    """
+    Generates a given number of Brownian motions and store them.
 
     Arguments
     ---------
@@ -15,13 +21,13 @@ def store_brownian_motions(db, n_sim: int) -> None:
 
     """
     for _ in range(n_sim):
-        bm = BrownianMotion(s0=100, n=200, dt=0.005, mu=0, sigma=2)
+        bm = BrownianMotion(s0, n, dt, mu, sigma)
         serialized_bm = bm.serialize()
         db.insert_brownian_motion(serialized_bm)
 
 def run_simulations(db: Database) -> tuple[np.ndarray, ...]:
     """
-    Run the market making simulation on the Brownian motions stored
+    Runs the market making simulation on the Brownian motions stored
     inside the given database.
 
     Arguments

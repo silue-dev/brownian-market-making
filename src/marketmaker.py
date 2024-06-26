@@ -23,7 +23,6 @@ class MarketMaker:
     The market maker's performance is evaluated in terms of cash flow, 
     inventory, and profit and loss (PnL) over the simulation period.
 
-
     Arguments
     ---------
     bm    :  The brownian motion, representing the stock price movement.
