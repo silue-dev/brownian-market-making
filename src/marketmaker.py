@@ -80,14 +80,14 @@ class MarketMaker:
         r_a = np.empty(self.bm.n)
         r_b = np.empty(self.bm.n)
         
-        # Run market maker on stock
+        # Run the market maker on the stock
         for i in range(self.bm.n):
-            # Compute reserve price and spread
+            # Compute the reserve price and spread
             r[i] = self.bm.s[i] \
                 - q[i] * self.gamma * self.bm.sigma ** 2 * (T - self.bm.dt * i)
             spread = 2 / self.gamma * np.log(1 + self.gamma / self.k)
 
-            # Compute quotes
+            # Compute the quotes
             r_a[i] = r[i] + spread / 2
             r_b[i] = r[i] - spread / 2
 
@@ -105,7 +105,7 @@ class MarketMaker:
                 p_exec_a = 1 - np.exp(-lambda_a * self.bm.dt)
                 p_exec_b = 1 - np.exp(-lambda_b * self.bm.dt)
 
-                # We execute one order if a side gets hit
+                # Execute an order if a side gets hit
                 executed_a = 0
                 executed_b = 0
                 if random() < p_exec_a:
@@ -113,7 +113,7 @@ class MarketMaker:
                 if random() < p_exec_b:
                     executed_b = 1
 
-                # Compute inventory, cash, and PnL
+                # Compute the inventory, cash, and PnL
                 q[i+1] = q[i] - executed_a + executed_b
                 cash[i+1] = cash[i] + r_a[i] * executed_a - r_b[i] * executed_b
                 pnl[i+1] = cash[i+1] + q[i+1] * self.bm.s[i]

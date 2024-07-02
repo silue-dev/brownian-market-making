@@ -70,7 +70,6 @@ class BrownianMotion:
         s = np.zeros(self.n)
         s[0] = self.s0
 
-        # Generate the stock price path
         for i in range(1, self.n):
             epsilon = np.random.normal()
             s[i] = s[i-1] + self.mu * self.dt \
