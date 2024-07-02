@@ -18,6 +18,11 @@ def store_brownian_motions(db: Database,
     ---------
     db    :  The database to store the brownian motions in.
     n_sim :  The number of Brownian motions to generate.
+    s0    :  The starting price of the stock.
+    n     :  The total number of time steps.
+    dt    :  The time step.
+    mu    :  The drift of the stock.
+    sigma :  The volatility of the stock.
 
     """
     for _ in range(n_sim):
@@ -56,7 +61,12 @@ def run_simulations(db: Database) -> tuple[np.ndarray, ...]:
     
     return t, s, r, r_a, r_b, q, np.array(pnls)
 
-def main(n_sim: int) -> None:
+def main(n_sim: int = 100,
+         s0: int = 100,
+         n: int = 200,
+         dt: float = 0.005,
+         mu: float = 0,
+         sigma: float = 2) -> None:
     """
     Main execution, which brings together the database setup, stock price
     data generation, market making simulation, and performance plotting.
@@ -69,7 +79,7 @@ def main(n_sim: int) -> None:
     db = Database()
     db.connect()
     db.create_table()
-    store_brownian_motions(db, n_sim)
+    store_brownian_motions(db, n_sim, s0, n, dt, mu, sigma)
 
     t, s, r, r_a, r_b, q, pnls = run_simulations(db)
     
