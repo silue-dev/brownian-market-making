@@ -24,7 +24,7 @@ def plot_performance(t: np.ndarray,
     """
     f = plt.figure(figsize=(12, 12))
 
-    # Final run prices
+    # Final run prices.
     ax1 = f.add_subplot(2, 2, 1)
     plt.plot(t, s, color='black', label='Market price')
     plt.plot(t, r, color='blue', linestyle='dashed', label='Reservation price')
@@ -38,7 +38,7 @@ def plot_performance(t: np.ndarray,
     plt.legend()
     ax1.set_title("Final Run Prices", fontweight='bold')
 
-    # Final run PnL
+    # Final run PnL.
     ax2 = f.add_subplot(2, 2, 2)
     plt.plot(t, pnls[-1], color='green', label='PnL')
     plt.xlabel('Time', fontweight='bold')
@@ -47,7 +47,7 @@ def plot_performance(t: np.ndarray,
     plt.legend()
     ax2.set_title("Final Run PnL", fontweight='bold')
 
-    # Final run inventory
+    # Final run inventory.
     ax3 = f.add_subplot(2, 2, 3)
     plt.plot(t, q, color='blue', label='Stocks held')
     plt.xlabel('Time', fontweight='bold')
@@ -56,7 +56,7 @@ def plot_performance(t: np.ndarray,
     plt.legend()
     ax3.set_title("Final Run Inventory", fontweight='bold')
 
-    # PnL distribution
+    # PnL distribution.
     ax4 = f.add_subplot(2, 2, 4)
     plt.hist(pnls[:,-1])
     plt.xlabel('PnL', fontweight='bold')

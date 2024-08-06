@@ -38,10 +38,10 @@ class MarketMaker:
         self.k = k
         self.gamma = gamma
 
-        # Time steps
+        # Time steps.
         self.t = np.linspace(0.0, bm.n * bm.dt, bm.n)
         
-        # Order execution probability factors
+        # Order execution probability factors.
         self.M = 1
         self.A = 1.0 / bm.dt / np.exp(k * self.M / 2)
 
@@ -60,29 +60,29 @@ class MarketMaker:
         pnl       :  The PnL array, i.e., the PnL at each time step.
 
         """
-        # Trading time
+        # Trading time.
         T = self.bm.n * self.bm.dt
 
-        # Cash
+        # Cash.
         cash = np.empty(self.bm.n)
         cash[0] = 0
 
-        # Inventory
+        # Inventory.
         q = np.empty(self.bm.n)
         q[0] = 0
 
-        # PnL
+        # PnL.
         pnl = np.empty(self.bm.n)
         pnl[0] = 0
 
-        # Reserve price and quotes
+        # Reserve price and quotes.
         r = np.empty(self.bm.n)
         r_a = np.empty(self.bm.n)
         r_b = np.empty(self.bm.n)
         
-        # Run the market maker on the stock
+        # Run the market maker on the stock.
         for i in range(self.bm.n):
-            # Compute the reserve price and spread
+            # Compute the reserve price and spread.
             r[i] = self.bm.s[i] \
                 - q[i] * self.gamma * self.bm.sigma ** 2 * (T - self.bm.dt * i)
             spread = 2 / self.gamma * np.log(1 + self.gamma / self.k)
@@ -93,19 +93,19 @@ class MarketMaker:
 
             if i < self.bm.n - 1:
                 # Since we don't have an order book, we must compute 
-                # the probability that the asks and/or bids get executed:
+                # the probability that the asks and/or bids get executed.
 
-                ### Deltas
+                ### Deltas.
                 delta_a = r_a[i] - self.bm.s[i]
                 delta_b = self.bm.s[i] - r_b[i]
-                ### Intensities
+                ### Intensities.
                 lambda_a = self.A * np.exp(-self.k * delta_a)
                 lambda_b = self.A * np.exp(-self.k * delta_b)
-                ### Order execution probabilities
+                ### Order execution probabilities.
                 p_exec_a = 1 - np.exp(-lambda_a * self.bm.dt)
                 p_exec_b = 1 - np.exp(-lambda_b * self.bm.dt)
 
-                # Execute an order if a side gets hit
+                # Execute an order if a side gets hit.
                 executed_a = 0
                 executed_b = 0
                 if random() < p_exec_a:
@@ -113,7 +113,7 @@ class MarketMaker:
                 if random() < p_exec_b:
                     executed_b = 1
 
-                # Compute the inventory, cash, and PnL
+                # Compute the inventory, cash, and PnL.
                 q[i+1] = q[i] - executed_a + executed_b
                 cash[i+1] = cash[i] + r_a[i] * executed_a - r_b[i] * executed_b
                 pnl[i+1] = cash[i+1] + q[i+1] * self.bm.s[i]
